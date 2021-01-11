@@ -14,5 +14,27 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index/landing');
 });
+
+Route::get('/explore', function () {
+    return view('user/explore');
+});
+
+Route::get('/explorer', function () {
+    return view('user/explorer');
+});
+
+Route::get('/inbox', function () {
+    return view('user/inbox');
+});
+
+Route::get('/user/{username}', function () {
+    return view('user/user-username');
+});
+
+//Logic
+//IndexController
+//Get Requests from /
+Route::get('/register/email/{email}/password/{password}/name/{name}/username/{username}', 'IndexController@Register');
+

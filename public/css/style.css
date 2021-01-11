@@ -1,0 +1,118 @@
+body {
+    background-color: #fafafa;
+}
+
+.index-device {
+    width: 100% !important;
+    height: auto;
+}
+
+.index-logo {
+    width: 200px;
+}
+
+.index-form-control {
+    width: 75%;
+    margin: auto;
+    padding: auto;
+}
+
+#forgot-password {
+    display: none;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.nav-icon {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.nav-title {
+    font-weight: 600;
+}
+
+.bg-white {
+    background-color: #fff;
+}
+
+.margin-top {
+    margin-top: 50px;
+}
+
+.stories-explore-icon {
+    width: 100%;
+}
+
+.index-post-header-icon {
+    width: 25px;
+    height: 25px;
+}
+
+.width-100-percent{
+    width: 100% !important;
+}
+
+.index-post-content-attachment {
+    width: 100% !important;
+    height: auto;
+}
+
+.index-post-footer-icon{
+    width: 25px;
+    height: 25px;
+}
+
+.message-header-icon{
+    width: 25px;
+    height: 25px;
+}
+
+.message-user-icon{
+    width: 50px;
+    height: 50px;
+}
+
+.message-content{
+    height: 450px;
+}
+
+.message-header{
+    border-bottom: #4d4d4d 3px solid;
+    padding-bottom: 10px;
+}
+
+.chat-section{
+    border-left: #4d4d4d 3px solid;
+}
+
+.message-margin-left-right{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.user-banner{
+    height: 250px;
+    background-image: url('https://picsum.photos/850/250');
+    background-size: 100% 100%;
+}
+
+.user-image{
+    margin-top: -35px;
+    height: 100px;
+    width: 100px;
+}
+
+.user-posts{
+    width:100%;
+    height: auto;
+}
+
+.nav-dropdown-icon{
+    width: 35px;
+    height: 35px;
+}

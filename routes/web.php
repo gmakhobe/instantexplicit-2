@@ -13,28 +13,51 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*
+
+    Start: View
+
+*/
+
 Route::get('/', function () {
     return view('index/landing');
 });
 
-Route::get('/explore', function () {
-    return view('user/explore');
-});
+// User Profile
+Route::get('/user/{username}', 'UserController@Profile')->middleware('IsSessionValid');
 
-Route::get('/explorer', function () {
-    return view('user/explorer');
-});
+// User Profile
+Route::get('/explore', 'UserController@Explore')->middleware('IsSessionValid');
 
-Route::get('/inbox', function () {
-    return view('user/inbox');
-});
+// User Profile
+Route::get('/explorer', 'UserController@Explorer')->middleware('IsSessionValid');
 
-Route::get('/user/{username}', function () {
-    return view('user/user-username');
-});
+// User Profile
+Route::get('/inbox', 'UserController@Inbox')->middleware('IsSessionValid');
 
-//Logic
-//IndexController
-//Get Requests from /
+/*
+
+    Ebd: View
+
+*/
+
+/*
+
+    Start: API
+
+*/
+
+// Register
 Route::get('/register/email/{email}/password/{password}/name/{name}/username/{username}', 'IndexController@Register');
 
+// Login
+Route::get('/login/email/{email}/password/{password}', 'IndexController@Login');
+
+// Logout
+Route::get('/logout', 'IndexController@Logout');
+
+/*
+
+    End: API
+
+*/

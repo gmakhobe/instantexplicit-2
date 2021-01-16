@@ -3,39 +3,73 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Logic\Validator;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use App\Http\Logic\AppSession;
 
 class IndexController extends Controller
 {
     public function Register($EmailAddress, $Password, $Name, $Username)
     {
         //Check if $mail and $password are empty strings
-        if (!$EmailAddress || !$Password || !$Name || !$Username)
-        {
+        if (!$EmailAddress || !$Password || !$Name || !$Username) {
             return json_encode(array("status" => 0, "message" => "All fields are required!"));
         }
-        //Make username
-        $username = Validator::getUsername($EmailAddress);
-        //Hash Password
-        //try{
-            $password = Hash::make($Password);
 
-            //Activation Hash
-            $activationHash = rand(99999999, 999999999);
+        //Encrypt Password
+        //$password = Hash::make($Password);
+        $password = $Password;
 
-            // Insert into the database
-            DB::insert('insert into users(UserId, Name, Surname, EmailAddress, Passcode, ActivationHash, Username, AccountActive) values (0, ?, ?, ?, ?, ?, ?, ?)', [$Name, $Username, $EmailAddress, $Password, $activationHash, "No"]);  
+        //Activation Hash
+        $activationHash = rand(99999999, 999999999);
 
-            //$mailArg = array("Name"=> $Name, "Surname"=> $surname, "ActivatioHash"=> $activationHash);
-            //Send email to client
-            //Mail::to($email)
-            //    ->send(new Registration($mailArg));
+        //Check if we have a user
+        $results = DB::select("SELECT * FROM users WHERE username = ? OR email_address = ?", [$EmailAddress, $EmailAddress]);
 
-            return json_encode(array("status" => 1, "message" => "User successfully registered"));
-        //}catch(Exception $e){
-        //    return json_encode(array("status" => 0, "message" => "An error occured please try again"));
-        //}
+        if (count($results)) {
+            return json_encode(array("status" => 0, "message" => "Register with a different username or email address"));
+        } else {
+            $results = DB::insert('insert into users(
+                Id, fullName, username, email_address, passcode, activation_hash, activation_status, user_type
+                ) values (
+                    0, ?, ?, ?, ?, ?, 0, 0
+                    )', [$Name, $Username, $EmailAddress, $password, $activationHash]);
+
+            return json_encode(array("status" => 1, "message" => "Registration was successful. You may login."));
+        }
+    }
+
+    public function Login($EmailAddress, $Password)
+    {
+
+        //Check if we have a user
+        $results = DB::select("SELECT * FROM users WHERE username = ? OR email_address = ?", [$EmailAddress, $EmailAddress]);
+
+        if (count($results)) {
+            //$comparePassword = Hash::check($P, 'userProfileURL'
+            $comparePassword = ($results[0]->passcode == $Password ? 1 : 0);
+
+            if ($comparePassword)
+            {
+                if (!$results[0]->activation_status) {
+                    return json_encode(array("status" => 0, "message" => "You need to activate your email address before you log in!"));
+                } else {
+                    AppSession::sessionSet($results);
+                    return json_encode(array("status" => 1, "message" => "Success"));
+                }
+            }
+
+            return json_encode(array("status" => 0, "message" => "Email Address or Password incorrect!"));
+        } else {
+            return json_encode(array("status" => 0, "message" => "Invalid credentials, try again with different credentials!"));
+        }
+    }
+
+    public function Logout(Request $request)
+    {
+        // Forget multiple keys...
+        $request->session()->forget(['user_info']);
+        $request->session()->flush();
+        //Redirect to /
+        return redirect('/');
     }
 }

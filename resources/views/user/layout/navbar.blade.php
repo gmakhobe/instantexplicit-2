@@ -16,7 +16,7 @@
                         <img id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"
                             class="nav-icon float-end" src="/images/icons/user.svg" alt="user icon" />
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="/user/{{ $Username }}">
                                     <img src="/images/icons/user.svg" class="img-thumbnail nav-dropdown-icon" alt="...">
                                     Profile
                                 </a></li>
@@ -28,7 +28,7 @@
                                     <img src="/images/icons/settings.svg" class="img-thumbnail nav-dropdown-icon"
                                         alt="..."> Settings
                                 </a></li>
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="javascript:window.location.assign('/logout');">
                                     Logout
                                 </a></li>
                         </ul>

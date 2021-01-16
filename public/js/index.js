@@ -55,23 +55,73 @@ const AppRegister = () => {
     icFETCH(`/register/email/${email}/password/${password}/name/${name}/username/${username}`, {}, csrf)
     .then(data => {
         const alertSuccessMSG = `<div class="alert alert-success"><strong>Success!</strong> Registration was successful. You may login.
-          </div>`;
+          </div><br/><br/><button type="button" onclick="accessControl()" class="btn btn-link m-2">Log
+          In</button>`;
 
+        //console.log(data);
         if (data.status) 
         {
             document.getElementById("reg-container").innerHTML = alertSuccessMSG;
         }
+
         if (data.status == 0)
         {
-            document.getElementById("reg-container").innerHTML = alertSuccessMSG;
-            document.getElementById("reg-btn").style.display = "inline";
-            alert(alert(data.message));
-        } 
+            alert(data.message);
+        }
     })
     .catch(error => {
         alert(`An error occured: Please try registering again with a different email address!`);
-        document.getElementById("reg-btn").style.display = "inline";
+        console.log(error);
+       
     });
+
+    document.getElementById("reg-btn").style.display = "inline";
 }
 
 // End User Registration
+
+// Start User Login
+
+const AppLogin = () => {
+    document.getElementById("log-btn").style.display = "none";
+    const email = document.getElementById("log-email").value;
+    const password = document.getElementById("log-password").value;
+    let csrf = "zxcvb";
+
+    if ( !email || !password){
+        alert("All fields required!");
+        document.getElementById("log-btn").style.display = "inline";
+        return ;
+    }
+
+    //Call custome Fetxh
+    icFETCH(`/login/email/${email}/password/${password}`, {}, csrf)
+    .then(data => {
+        const alertSuccessMSG = `<div class="alert alert-success"><strong>Success!</strong> Redirecting to explore.
+          </div>`;
+
+        //console.log(data);
+        if (data.status) 
+        {
+            document.getElementById("log-container").innerHTML = alertSuccessMSG;
+
+            setTimeout(() => {
+                window.location.assign("/explore");
+            }, 3000 /* Load for 3 seconds */);
+        }
+
+        if (data.status == 0)
+        {
+            alert(data.message);
+        }
+    })
+    .catch(error => {
+        alert(`An error occured: An error occured please try again!`);
+        console.log(error);
+       
+    });
+
+    document.getElementById("log-btn").style.display = "inline";
+}
+
+// End User Login

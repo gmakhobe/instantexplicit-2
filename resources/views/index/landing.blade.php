@@ -35,7 +35,7 @@
                 <div class="mx-auto">
                     <img class="index-logo rounded mx-auto d-block" src="/images/logo.png" alt="Device Image" />
                     <div id="access-control">
-                        <div class="access-control">
+                        <div class="access-control" id="log-container">
                             <input type="email" class="form-control index-form-control mt-5" id="log-email"
                                 placeholder="Email Address">
 
@@ -44,7 +44,7 @@
 
                             <p class="m-3 text-center pointer" onclick="fogortPassword()">Forgot Password?</p>
 
-                            <button type="button" onclick="window.location.assign('/explore');" class="btn btn-primary mt-3 index-form-control mx-auto d-block">Log
+                            <button id="log-btn" type="button" onclick="AppLogin()" class="btn btn-primary mt-3 index-form-control mx-auto d-block">Log
                                 In</button>
 
                             <p class="text-center m-5">OR</p>
@@ -55,7 +55,7 @@
 
                         </div>
 
-                        <div class="access-control">
+                        <div class="access-control" id="reg-container">
 
                             <input type="email" class="form-control index-form-control mt-5" id="reg-email"
                                 placeholder="Email Address">
@@ -74,7 +74,7 @@
 
                             <p class="text-center m-5">OR</p>
 
-                            <p class="text-center m-2">Already have an account? <br />
+                           <p class="text-center m-2">Already have an account? <br />
                                 <button type="button" onclick="myShow.previous()" class="btn btn-link m-2">Log
                                     In</button>
 
@@ -87,7 +87,7 @@
                         <p class="text-center m-4">Enter your email address below to send forgot password link to your
                             email address.</p>
 
-                        <input type="email" class="form-control index-form-control mt-5" id="log-email"
+                        <input type="email" class="form-control index-form-control mt-5" id="fog-email"
                             placeholder="Email Address">
 
                         <button type="button" class="btn btn-primary mt-3 index-form-control mx-auto d-block">Send link</button>

@@ -53,7 +53,7 @@ body {
     height: 25px;
 }
 
-.width-100-percent{
+.width-100-percent {
     width: 100% !important;
 }
 
@@ -62,57 +62,72 @@ body {
     height: auto;
 }
 
-.index-post-footer-icon{
+.index-post-footer-icon {
     width: 25px;
     height: 25px;
 }
 
-.message-header-icon{
+.message-header-icon {
     width: 25px;
     height: 25px;
 }
 
-.message-user-icon{
+.message-user-icon {
     width: 50px;
     height: 50px;
 }
 
-.message-content{
+.message-content {
     height: 450px;
 }
 
-.message-header{
+.message-header {
     border-bottom: #4d4d4d 3px solid;
     padding-bottom: 10px;
 }
 
-.chat-section{
+.chat-section {
     border-left: #4d4d4d 3px solid;
 }
 
-.message-margin-left-right{
+.message-margin-left-right {
     margin-left: 10px;
     margin-right: 10px;
 }
 
-.user-banner{
+.user-banner {
     height: 250px;
-    background-image: url('https://picsum.photos/850/250');
     background-size: 100% 100%;
 }
 
-.user-image{
+.user-image {
     margin-top: -35px;
     height: 100px;
     width: 100px;
 }
 
-.user-posts{
-    width:100%;
+.user-posts {
+    width: 100%;
     height: auto;
 }
 
-.nav-dropdown-icon{
+.nav-dropdown-icon {
     width: 35px;
     height: 35px;
+}
+
+.my-top-space {
+    padding-top: 25px;
+}
+
+.my-profile-padding-15 {
+    padding: 15px;
+}
+
+.my-social-icon {
+    width: 55px;
+    height: 55px;
+    padding: 15px;
+    bottom: 10px;
+    position: relative;
 }

@@ -35,18 +35,44 @@
             <div class="col-sm-2"></div>
             <div class="col-sm-8">
 
-                <div class="row">
-                    <?php for ($index = 0; $index < 20; $index++) { ?> <div
-                        class="col-sm-4">
-                        <div onclick="window.location.assign('/user/username');" class="card m-4" style="width: 18rem;">
-                            <img src="https://picsum.photos/450/450" class="card-img-top" alt="user icon">
-                            <div class="card-body">
-                                <h5 class="card-title">Username</h5>
-                                <p class="card-text">Name and Surname</p>
+                @if (!$IsSearch)
+
+                    <div class="row">
+                        @for ($index = 0; $index < count($Users); $index++)
+                            <div class="col-sm-4">
+                                <div onclick="window.location.assign('/user/{{ $Users[$index]->username }}');"
+                                    class="card m-4">
+                                    <img src="{{ $Users[$index]->url_profile ? $Users[$index]->url_profile : '/user.svg' }}"
+                                        class="card-img-top" alt="user icon">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $Users[$index]->username }}</h5>
+                                        <p class="card-text">{{ $Users[$index]->full_name }}</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                </div>
-                <?php } ?>
+                        @endfor
+                    </div>
+
+                @else
+
+                    <div class="row">
+                        @for ($index = 0; $index < count($SearchedUsers); $index++)
+                            <div class="col-sm-4">
+                                <div onclick="window.location.assign('/user/{{ $SearchedUsers[$index]->username }}');"
+                                    class="card m-4">
+                                    <img src="{{ $SearchedUsers[$index]->url_profile ? $SearchedUsers[$index]->url_profile : '/user.svg' }}"
+                                        class="card-img-top" alt="user icon">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $SearchedUsers[$index]->username }}</h5>
+                                        <p class="card-text">{{ $SearchedUsers[$index]->full_name }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        @endfor
+                    </div>
+
+                @endif
+
             </div>
 
         </div>

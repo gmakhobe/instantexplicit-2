@@ -57,51 +57,86 @@
                     </div>
                 </div>
 
-                <?php 
-                    //Load stories
-                    //Load stories
-                    for ($index = 0; $index < 20; $index++) { 
-                ?>
+                @for ($index = 0; $index < count($GetLatestPost); $index++)
                 
                 <div class="card m-5">
                     <div class="card-body">
                         
                         <div class="index-post-header">
                             <div class="float-start">
-                                <img src="https://picsum.photos/250/250" class="index-post-header-icon rounded float-start" alt="creator icon"> <span class="m-3">Creator_Username</span><br/><span class="m-3">1 Hour Ago &sdot; From Android</span>
+                                <img src="{{ $GetLatestPost[$index]->Profile }}" class="index-post-header-icon rounded float-start" alt="creator icon"> <span class="m-3">{{ $GetLatestPost[$index]->Username }}</span><br/><span class="m-3">{{ $GetLatestPost[$index]->CreatedDate }} &sdot; From Device</span>
                             </div>
                             <div class="float-end">
                                 <img src="/images/icons/more.svg" class="index-post-header-icon rounded float-start" alt="creator icon">
                             </div>
                         </div>
                         
-                        <figure class="figure width-100-percent mt-3">
+                        <figure onclick="window.location.assign('/post/{{ $GetLatestPost[$index]->Username }}/id/{{ $GetLatestPost[$index]->PostId }}')" class="figure width-100-percent mt-3">
 
-                            <p class="lead">Hellow World bjbjbb hbhjbhjb  jbkbk bkjbkjb bbhbh nnkn</p>
+                            <p class="lead">{{ $GetLatestPost[$index]->Caption }}</p>
 
-                            <img src="https://picsum.photos/450/650" class="figure-img img-fluid rounded index-post-content-attachment" alt="...">
+                            <img src="{{ $GetLatestPost[$index]->Path }}" class="figure-img img-fluid rounded index-post-content-attachment" alt="...">
                             
                         </figure>
-                        <div class="width-100-percent">
-                            <div class="float-start">
-                                <img src="/images/icons/banana.svg" class="index-post-footer-icon rounded m-2" alt="banana icon">
-                                <img src="/images/icons/peach.svg" class="index-post-footer-icon rounded m-2" alt="peach icon">
-                                <img onclick="window.location.assign('/inbox')" src="/images/icons/send.svg" class="index-post-footer-icon rounded m-2" alt="peach icon">
-                            </div>
-                            <div class="float-end">
-                                <img src="/images/icons/share.svg" class="index-post-footer-icon rounded m-2" alt="banana icon">
-                            </div>
-                        </div>
+                        <div class="width-100-percent p-20">
+                        <p class="lead">{{ $GetLatestPost[$index]->Caption }}</p>
                         
-                        <!--<p class="m-auto width-100-percent">Image Caption</p>-->
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+                        @php
+                                $results = DB::select('select * from bananas B
+                                where B.post_id = ?', [ $GetLatestPost[$index]->PostId ]);
+
+                                $hasBananad = (count($results) > 0 ? true: false);
+                        @endphp
+                        
+                        @if (!$hasBananad)
+                            
+                            <img onclick="window.location.assign('/post/{{ $GetLatestPost[$index]->Username }}/banana/{{ $GetLatestPost[$index]->PostId }}')" src="/images/icons/banana.svg" class="index-post-footer-icon rounded m-2" alt="banana icon"> 
+                            
+
+                        @else
+
+                            <img src="/images/icons/banana.svg" class="index-post-footer-icon rounded m-2" alt="banana icon"> &#10003; 
+                            
+                        @endif
+
+                        ({{ $hasBananad }})
+
+                        @php
+                                $resultsPeach = DB::select('select * from peachs B
+                                where B.post_id = ?', [ $GetLatestPost[$index]->PostId ]);
+
+                                $hasPeachd = (count($resultsPeach) > 0 ? true: false);
+                        @endphp
+
+                        @if (!$hasPeachd)
+
+                            <img onclick="window.location.assign('/post/{{ $GetLatestPost[$index]->Username }}/peach/{{ $GetLatestPost[$index]->PostId }}')" src="/images/icons/peach.svg" class="index-post-footer-icon rounded m-2" alt="peach icon">
+
+                        @else
+
+                            <img src="/images/icons/peach.svg" class="index-post-footer-icon rounded m-2" alt="peach icon"> &#10003; 
+
+                        @endif
+
+                        (@php
+                                $resultsPeach = DB::select('select COUNT(*) AS "Total" from peachs where Id = ?', [ $GetLatestPost[$index]->PostId ]);
+
+                                echo $resultsPeach[0]->Total;
+                        @endphp)
+
+                            <img onclick="window.location.assign('/inbox')" src="/images/icons/send.svg" class="index-post-footer-icon rounded m-2" alt="peach icon">
+
+                            <img onclick="copyToClipboard()" src="/images/icons/share.svg" class="index-post-footer-icon rounded m-2" alt="banana icon">
+
+                            <input type="text" id="linkToPost" value="http://localhost:8000/post/{{ $GetLatestPost[$index]->Username }}/id/{{ $GetLatestPost[$index]->PostId }}" hidden/>
+
+                    </div>
+                        
                         
                     </div>
                 </div>
                 
-                <?php 
-                    } 
-                ?>
+                @endfor
 
             </div>
             <div class="col-sm-2"></div>

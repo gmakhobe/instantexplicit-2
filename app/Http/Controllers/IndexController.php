@@ -29,7 +29,7 @@ class IndexController extends Controller
             return json_encode(array("status" => 0, "message" => "Register with a different username or email address"));
         } else {
             $results = DB::insert('insert into users(
-                Id, fullName, username, email_address, passcode, activation_hash, activation_status, user_type
+                Id, full_name, username, email_address, passcode, activation_hash, activation_status, user_type
                 ) values (
                     0, ?, ?, ?, ?, ?, 0, 0
                     )', [$Name, $Username, $EmailAddress, $password, $activationHash]);

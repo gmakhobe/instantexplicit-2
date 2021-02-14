@@ -7,9 +7,11 @@
                     <p class="float-start nav-title h6">Instant Explicit</p>
                 </div>
                 <div class="col-sm-4">
-                    <center>
-                        <input type="text" class="form-control" placeholder="Search" />
-                    </center>
+                    <form action="/explorer/search" method="GET">
+                        <center>
+                            <input name="Keyword" type="text" class="form-control" placeholder="Search" />
+                        </center>
+                    </form>
                 </div>
                 <div class="col-sm-4">
                     <div class="dropdown">
@@ -42,6 +44,8 @@
                         src="/images/icons/send.svg" alt="messages icon" />
                     <img onclick="window.location.assign('/explore')" class="nav-icon float-end"
                         src="/images/icons/home.svg" alt="home icon" />
+                    <img onclick="window.location.assign('/create-post')" class="nav-icon float-end"
+                        src="/images/icons/add.svg" alt="add icon" />
 
                 </div>
             </div>
@@ -65,7 +69,7 @@
                     <li class="list-group-item">Notification 3</li>
                     <li class="list-group-item">Notification 4</li>
                     <li class="list-group-item">Notification 5</li>
-                  </ul>
+                </ul>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

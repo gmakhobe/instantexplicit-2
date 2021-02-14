@@ -7,24 +7,11 @@ class AppSession{
     public static function sessionSet($instance){
         //Create an array
         $BuildSessionUserData = array(
-            "Name"=> $instance[0]->fullName,
+            "Id"=> $instance[0]->Id,
+            "Name"=> $instance[0]->full_name,
             "Username"=> $instance[0]->username,
             "Email"=> $instance[0]->email_address
         );
-
-        //Specifically for image url
-        /*if (!$instance[0]->ProfilePicture){
-            $ProfilePicture = "images/user-icon.svg";
-            $IsBase64 = 0;
-        }else{
-            $ProfilePicture = $instance[0]->ProfilePicture;
-            $IsBase64 = 1;
-        }*/
-
-        /*$BuildSessionProfilePictureUrl = array(
-            "Base64"=> $ProfilePicture,
-            "IsBase64"=> $IsBase64
-        );*/
 
         //Initiate request to set session
         session()->put("user_info", $BuildSessionUserData);

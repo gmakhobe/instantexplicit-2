@@ -49,27 +49,16 @@
 
                                 <ul class="list-group">
                                     <li class="list-group-item">
-                                        <img src="https://picsum.photos/250/250" class="message-user-icon rounded message-margin-left-right float-start" alt="creator icon"> User 1
+                                        <img src="/profile_banners/gmakhobe_1611533652_profile_banner.jpg" class="message-user-icon rounded message-margin-left-right float-start" alt="creator icon"> gmakhobe
                                     </li>
-                                    <li class="list-group-item">
-                                        <img src="https://picsum.photos/250/250" class="message-user-icon rounded message-margin-left-right float-start" alt="creator icon"> User 2
-                                    </li>
-                                    <li class="list-group-item">
-                                        <img src="https://picsum.photos/250/250" class="message-user-icon rounded message-margin-left-right float-start" alt="creator icon"> User 3
-                                    </li>
-                                    <li class="list-group-item">
-                                        <img src="https://picsum.photos/250/250" class="message-user-icon rounded message-margin-left-right float-start" alt="creator icon"> User 4
-                                    </li>
-                                    <li class="list-group-item">
-                                        <img src="https://picsum.photos/250/250" class="message-user-icon rounded message-margin-left-right float-start" alt="creator icon"> User 5
-                                    </li>
+                                    
                                   </ul>
 
                             </div>
                             <div class="col-sm-6 chat-section">
                                 <div class="message-header">
                                     <div >
-                                        <img src="https://picsum.photos/250/250" class="message-header-icon rounded float-start" alt="creator icon"> <span class="m-3">User 1</span>
+                                        <img src="https://picsum.photos/250/250" class="message-header-icon rounded float-start" alt="creator icon"> <span class="m-3">gmakhobe</span>
                                     </div>
                                 </div>
 

@@ -196,16 +196,24 @@ class UserController extends Controller
         //Get user information
         $username = session()->get('user_info')["Username"];
         $user_info = DB::select('select * from users where username = ?', [$Username]);
-        $user_account_posts = UserPosts::GetSelectedUserPosts($Username);
+        $user_following = UserPosts::GetSelectedUserNumberOfFollowing($Username);
+        $user_following_base = UserPosts::GetSelectedUserFollowingBase($Username);
 
-        if ($Username == $username || $user_info[0]->user_type) {
-            $IsCurrentUser = ($Username == $username ? 1 : 0);
-            return view('user/user-username',  ["Username" => $username, "UserInfo" => $user_info[0], "IsCurrentUser" => $IsCurrentUser, "UserPosts" => $user_account_posts]);
-        } else {
+        if (!$user_info[0]->user_type) {
+
+            $user_account_posts = UserPosts::GetSelectedUserPosts($Username);
+            $user_followers = UserPosts::GetSelectedUserNumberOfFollowers($Username);
+            $user_peaches = UserPosts::GetSelectedUserNumberOfPeaches($Username);
+            $user_bananas = UserPosts::GetSelectedUserNumberOfBananas($Username);
             //Get current user following status
             $isFollowedByMe = UserPosts::IsFollowedByMe($Username);
+
+            $IsCurrentUser = ($Username == $username ? 1 : 0);
+            return view('user/user-username',  ["Username" => $username, "UserInfo" => $user_info[0], "IsCurrentUser" => $IsCurrentUser, "UserPosts" => $user_account_posts, "NumberOfFollowers"=> $user_followers[0]->total_followers, "NumberOfPeaches"=> $user_peaches[0]->total_number_of_peaches, "NumberOfBananas"=> $user_bananas[0]->total_number_of_bananas, "isFollowedByMe" => $isFollowedByMe]);
+        } else {
+            
             //print_r($isFollowedByMe);
-            return view('user/other-user-username', ["Username" => $username, "UserInfo" => $user_info[0], "UserPosts" => $user_account_posts, "isFollowedByMe" => $isFollowedByMe]);
+            return view('user/other-user-username', ["Username" => $username, "UserInfo" => $user_info[0], "NumberOfFollowing"=> $user_following[0]->total_following, "FollowingBase"=> $user_following_base]);
         }
     }
 
@@ -213,7 +221,7 @@ class UserController extends Controller
     {
         $username = session()->get('user_info')["Username"];
 
-        $results = DB::select('select Id, full_name, username, url_profile from users where username != ? ORDER BY registration_date DESC LIMIT ?', [$username, 20]);
+        $results = DB::select('SELECT Id, full_name, username, url_profile FROM users WHERE username != ? AND user_type = ? ORDER BY registration_date DESC LIMIT ?', [$username, 0, 20]);
 
         return view('user/explorer', ["Username" => $username, "Users" => $results, "IsSearch" => 0]);
     }

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" href="/favicon.png" />
-    <title>Explore -Instant Explicit</title>
+    <title>Explore - Instant Explicit</title>
 
     <!-- Start: CSS CDN Bootstrap 5-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -34,12 +34,18 @@
         <div class="row">
             <div class="col-sm-2"></div>
             <div class="col-sm-8">
-
+                <p>
+                </b>
+                    <center>
+                        <a href="https://instantexplicit.company.site/" target="_">instantexplicit.company.site</a>
+                    </center>
+                </p>
+                <!--
                 <div class="card m-5">
                     <div class="card-body">
                         <div class="row">
                             
-                                <?php //Load stories
+                                < ? php //Load stories
                                 //Load stories
                                     for ($index = 0; $index < 11; $index++) { 
                                 ?> 
@@ -47,7 +53,7 @@
                                         <img src="https://picsum.photos/250/250" class="stories-explore-icon rounded float-start" alt="...">
                                     </div>
 
-                                <?php } ?>
+                                < ? php } ? >
 
                                 <div class="col-sm-1">
                                     <img src="/images/icons/right-arrow.svg" class="stories-explore-icon rounded float-start" alt="...">
@@ -56,6 +62,7 @@
                         </div>
                     </div>
                 </div>
+            -->
 
                 @for ($index = 0; $index < count($GetLatestPost); $index++)
                 
@@ -66,9 +73,11 @@
                             <div class="float-start">
                                 <img src="{{ $GetLatestPost[$index]->Profile }}" class="index-post-header-icon rounded float-start" alt="creator icon"> <span class="m-3">{{ $GetLatestPost[$index]->Username }}</span><br/><span class="m-3">{{ $GetLatestPost[$index]->CreatedDate }} &sdot; From Device</span>
                             </div>
-                            <div class="float-end">
+                            <!--
+                                More options
+                                <div class="float-end">
                                 <img src="/images/icons/more.svg" class="index-post-header-icon rounded float-start" alt="creator icon">
-                            </div>
+                            </div>-->
                         </div>
                         
                         <figure onclick="window.location.assign('/post/{{ $GetLatestPost[$index]->Username }}/id/{{ $GetLatestPost[$index]->PostId }}')" class="figure width-100-percent mt-3">

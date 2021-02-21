@@ -20,7 +20,9 @@
         #view-biography-after {
             display: none;
         }
-
+        .bg-white {
+            background-color: #fff;
+        }
     </style>
     <!-- Start: JS Script-->
     <script src="/js/w3.js"></script>
@@ -45,72 +47,16 @@
                 @if ($UserInfo->url_banner)
 
                     <div class="user-banner my-social-icon-box" style=" background-image: url('{{ $UserInfo->url_banner }}');">
-                        <p class="my-profile-padding-15 lead"><span style="background-color:#fff;color:#000">30 Followers</span>
-                            <br />
-                            <span style="background-color:#fff;color:#000">25 <img src="/images/icons/banana.svg" class="index-post-footer-icon rounded m-2"
-                                alt="banana icon">
-                            25
-                            <img src="/images/icons/peach.svg" class="index-post-footer-icon rounded m-2"
-                                alt="peach icon">
-                            </span>
-                        </p>
-                        <p class="my-profile-padding-15 text-end">
-                            @if ($UserInfo->url_twitter)
-                                <a target="_blank" href="{{ $UserInfo->url_twitter }}">
-                                    <img src="/images/twitter.svg" class="my-social-icon" alt="twitter" />
-                                </a>
-                            @endif
-
-                            @if ($UserInfo->url_instagram)
-                                <a target="_blank" href="{{ $UserInfo->url_instagram }}">
-                                    <img src="/images/instagram.svg" class="my-social-icon" alt="instagram" />
-                                </a>
-                            @endif
-
-                            @if ($UserInfo->url_onlyfans)
-                                <a target="_blank" href="{{ $UserInfo->url_onlyfans }}">
-                                    <img src="/images/onlyfans.png" class="my-social-icon" alt="instagram" />
-                                </a>
-                            @endif
-
-                        </p>
-                    </div>
-
 
                 @else
 
                     <div class="user-banner my-social-icon-box" style=" background-image: url('/banner.png');">
-                        <p class="my-profile-padding-15 lead">30 Followers
-                            <br />
-                            25 <img src="/images/icons/banana.svg" class="index-post-footer-icon rounded m-2"
-                                alt="banana icon">
-                            25
-                            <img src="/images/icons/peach.svg" class="index-post-footer-icon rounded m-2"
-                                alt="peach icon">
-                        </p>
-                        <p class="my-profile-padding-15 text-end">
-                            @if ($UserInfo->url_twitter)
-                                <a target="_blank" href="{{ $UserInfo->url_twitter }}">
-                                    <img src="/images/twitter.svg" class="my-social-icon" alt="twitter" />
-                                </a>
-                            @endif
-
-                            @if ($UserInfo->url_instagram)
-                                <a target="_blank" href="{{ $UserInfo->url_instagram }}">
-                                    <img src="/images/instagram.svg" class="my-social-icon" alt="instagram" />
-                                </a>
-                            @endif
-
-                            @if ($UserInfo->url_onlyfans)
-                                <a target="_blank" href="{{ $UserInfo->url_onlyfans }}">
-                                    <img src="/images/onlyfans.png" class="my-social-icon" alt="instagram" />
-                                </a>
-                            @endif
-
-                        </p>
-                    </div>
 
                 @endif
+                        <p class="my-profile-padding-15 lead"><span class="bg-white">{{ $NumberOfFollowing }} Following</span></p>
+
+                    </div>
+
 
                 @if ($UserInfo->url_profile)
 
@@ -125,13 +71,7 @@
                 @if ($UserInfo->full_name)
                     <h4>{{ $UserInfo->full_name }}</h4>
                 @endif
-                <p>Online &sdot;
-                    @if (!count($isFollowedByMe))
-                        <a href="/user/follow/{{ $UserInfo->username }}">Follow: @ {{ $UserInfo->username }}</a>
-                    @else
-                        <a href="/user/unfollow/{{ $UserInfo->username }}">Unfollow @ {{ $UserInfo->username }}</a>
-                    @endif
-                </p>
+                <p>Online</p>
                 @if ($UserInfo->full_name)
                     <p><a target="_blank" href="/user/{{ $UserInfo->username }}">@
                             {{ $UserInfo->username }}</a></p>
@@ -146,20 +86,6 @@
                             <li>
                                 Registration Date: {{ $UserInfo->registration_date }}
                             </li>
-                            @if ($UserInfo->url_website)
-                                <li>
-                                    Website:
-                                    <a target="_blank" href="//{{ $UserInfo->url_website }}">
-                                        {{ $UserInfo->url_website }}
-                                    </a>
-                                </li>
-                            @endif
-
-                            @if ($UserInfo->category)
-                                <li>
-                                    Category: {{ $UserInfo->category }}
-                                </li>
-                            @endif
 
                         </ul>
                     </div>
@@ -174,28 +100,24 @@
                     </script>
                 @endif
 
-                <h5>Subscription R{{ $UserInfo->subscription_fee }} per month</h5>
-                <div class="d-grid gap-2">
-                    <button class="btn btn-primary" type="button">Subscribe for
-                        R{{ $UserInfo->subscription_fee }}</button>
-                </div>
-
-                <p class="text-center">Posts</p>
-
+                <h5 class="text-center">Content Creators Following</h5>
+                
                 <div class="row">
 
-                    <div class="row">
-
-                        @for ($index = 0; $index < count($UserPosts); $index++)
-                            <div class="col-sm-4"
-                                onclick="window.location.assign('/post/{{ $UserInfo->username }}/id/{{ $UserPosts[$index]->Id }}')">
-                                <img src="{{ $UserPosts[$index]->path }}" class="img-thumbnail user-posts"
-                                    alt="user-posts">
+                    @for ($index = 0; $index < count($FollowingBase); $index++)
+                        <div class="col-sm-4">
+                            <div onclick="window.location.assign('/user/{{ $FollowingBase[$index]->username }}');"
+                                class="card m-4">
+                                <img src="{{ $FollowingBase[$index]->url_profile ? $FollowingBase[$index]->url_profile : '/user.svg' }}"
+                                    class="card-img-top" alt="user icon">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $FollowingBase[$index]->username }}</h5>
+                                    <p class="card-text">{{ $FollowingBase[$index]->full_name }}</p>
+                                </div>
                             </div>
-                        @endfor
-                    </div>
-
-
+                        </div>
+                    @endfor
+                    
                 </div>
 
             </div>

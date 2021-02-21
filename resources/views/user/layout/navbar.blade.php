@@ -1,3 +1,12 @@
+<!-- include alertify.css -->
+<link rel="stylesheet" href="/public/libs/alertifyjs/css/alertify.css">
+
+<!-- include boostrap theme  -->
+<link rel="stylesheet" href="/public/libs/alertifyjs/css/themes/bootstrap.css">
+
+<!-- include alertify script -->
+<script src="/public/libs/alertifyjs/alertify.js"></script>
+
 <div class="container-fluid p-3 fixed-top bg-white">
     <div class="row">
         <div class="col-sm-2"></div>
@@ -64,11 +73,7 @@
             </div>
             <div class="modal-body">
                 <ul class="list-group">
-                    <li class="list-group-item">Notification 1</li>
-                    <li class="list-group-item">Notification 2</li>
-                    <li class="list-group-item">Notification 3</li>
-                    <li class="list-group-item">Notification 4</li>
-                    <li class="list-group-item">Notification 5</li>
+                    <li class="list-group-item">0 Notification</li>
                 </ul>
             </div>
             <div class="modal-footer">

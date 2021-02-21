@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" href="/favicon.png" />
-    <title>Explore -Instant Explicit</title>
+    <title>Explore - Instant Explicit</title>
 
     <!-- Start: CSS CDN Bootstrap 5-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -19,6 +19,10 @@
     <style>
         #view-biography-after{
             display: none;
+        }
+
+        .bg-white {
+            background-color: #fff;
         }
     </style>
     <!-- Start: JS Script-->
@@ -59,55 +63,24 @@
                             @if ($UserInfo->url_banner)
 
                                 <div class="user-banner" style="background-image: url('{{ $UserInfo->url_banner }}')">
-                                
-                                    <p class="my-profile-padding-15 lead">30 Followers
-                                        <br />
-                                        25 <img src="/images/icons/banana.svg"
-                                            class="index-post-footer-icon rounded m-2" alt="banana icon">
-                                        25
-                                        <img src="/images/icons/peach.svg" class="index-post-footer-icon rounded m-2"
-                                            alt="peach icon">
-                                    </p>
-
-                                    
-
-                                    <p class="my-profile-padding-15 text-end">
-                                        @if ($UserInfo->url_twitter)
-                                            <a target="_blank" href="{{ $UserInfo->url_twitter }}">
-                                                <img src="/images/twitter.svg" class="my-social-icon" alt="twitter" />
-                                            </a>
-                                        @endif
-
-                                        @if ($UserInfo->url_instagram)
-                                            <a target="_blank" href="{{ $UserInfo->url_instagram }}">
-                                                <img src="/images/instagram.svg" class="my-social-icon"
-                                                    alt="instagram" />
-                                            </a>
-                                        @endif
-
-                                        @if ($UserInfo->url_onlyfans)
-                                            <a target="_blank" href="{{ $UserInfo->url_onlyfans }}">
-                                                <img src="/images/onlyfans.png" class="my-social-icon"
-                                                    alt="instagram" />
-                                            </a>
-                                        @endif
-
-                                    </p>
-                                </div>
 
                             @else
 
-                                <div class="user-banner my-social-icon-box"
-                                    style=" background-image: url('/banner.png');">
-                                    <p class="my-profile-padding-15 lead">30 Followers
-                                        <br />
-                                        25 <img src="/images/icons/banana.svg"
-                                            class="index-post-footer-icon rounded m-2" alt="banana icon">
-                                        25
-                                        <img src="/images/icons/peach.svg" class="index-post-footer-icon rounded m-2"
-                                            alt="peach icon">
+                                <div class="user-banner my-social-icon-box" style=" background-image: url('/banner.png');">
+                                
+                            @endif
+
+                                    <p class="my-profile-padding-15 lead"><span class="bg-white"> {{ $NumberOfFollowers }} Followers</span>
+                                    <br/>
+                                    <span style="background-color:#fff;color:#000">{{ $NumberOfPeaches }} <img src="/images/icons/banana.svg" class="index-post-footer-icon rounded m-2"
+                                        alt="banana icon">
+                                    {{ $NumberOfBananas }}
+                                    <img src="/images/icons/peach.svg" class="index-post-footer-icon rounded m-2"
+                                        alt="peach icon">
+                                    </span>
                                     </p>
                                     <p class="my-profile-padding-15 text-end">
+
                                         @if ($UserInfo->url_twitter)
                                             <a target="_blank" href="{{ $UserInfo->url_twitter }}">
                                                 <img src="/images/twitter.svg" class="my-social-icon" alt="twitter" />
@@ -130,8 +103,6 @@
 
                                     </p>
                                 </div>
-
-                            @endif
 
                             @if ($UserInfo->url_profile)
 
@@ -210,6 +181,7 @@
                             </div>
 
                         </div>
+                        <div class="col-sm-2"></div>
 
                     </div>
 
@@ -483,20 +455,25 @@
 
                     @if ($UserInfo->url_banner)
 
-                        <div class="user-banner" style="background-image: {{ $UserInfo->url_banner }}"></div>
+                        <div class="user-banner" style="background-image: url('{{ $UserInfo->url_banner }}')">
 
                     @else
 
                         <div class="user-banner my-social-icon-box" style=" background-image: url('/banner.png');">
-                            <p class="my-profile-padding-15 lead">30 Followers
-                                <br />
-                                25 <img src="/images/icons/banana.svg" class="index-post-footer-icon rounded m-2"
-                                    alt="banana icon">
-                                25
-                                <img src="/images/icons/peach.svg" class="index-post-footer-icon rounded m-2"
-                                    alt="peach icon">
+                        
+                    @endif
+
+                            <p class="my-profile-padding-15 lead"><span class="bg-white"> {{ $NumberOfFollowers }} Followers</span>
+                            <br/>
+                            <span style="background-color:#fff;color:#000">{{ $NumberOfPeaches }} <img src="/images/icons/banana.svg" class="index-post-footer-icon rounded m-2"
+                                alt="banana icon">
+                            {{ $NumberOfBananas }}
+                            <img src="/images/icons/peach.svg" class="index-post-footer-icon rounded m-2"
+                                alt="peach icon">
+                            </span>
                             </p>
                             <p class="my-profile-padding-15 text-end">
+
                                 @if ($UserInfo->url_twitter)
                                     <a target="_blank" href="{{ $UserInfo->url_twitter }}">
                                         <img src="/images/twitter.svg" class="my-social-icon" alt="twitter" />
@@ -505,24 +482,25 @@
 
                                 @if ($UserInfo->url_instagram)
                                     <a target="_blank" href="{{ $UserInfo->url_instagram }}">
-                                        <img src="/images/instagram.svg" class="my-social-icon" alt="instagram" />
+                                        <img src="/images/instagram.svg" class="my-social-icon"
+                                            alt="instagram" />
                                     </a>
                                 @endif
 
                                 @if ($UserInfo->url_onlyfans)
                                     <a target="_blank" href="{{ $UserInfo->url_onlyfans }}">
-                                        <img src="/images/onlyfans.png" class="my-social-icon" alt="instagram" />
+                                        <img src="/images/onlyfans.png" class="my-social-icon"
+                                            alt="instagram" />
                                     </a>
                                 @endif
 
                             </p>
                         </div>
 
-                    @endif
-
                     @if ($UserInfo->url_profile)
 
-                        <img src="{{ $UserInfo->url_profile }}" class="img-thumbnail user-image" alt="user-icon">
+                        <img src="{{ $UserInfo->url_profile }}" class="img-thumbnail user-image"
+                            alt="user-icon">
 
                     @else
 
@@ -530,11 +508,17 @@
 
                     @endif
 
-                    @if ($UserInfo->fullName)
-                        <h4>{{ $UserInfo->fullName }}</h4>
+                    @if ($UserInfo->full_name)
+                        <h4>{{ $UserInfo->full_name }}</h4>
                     @endif
-                    <p>Online</p>
-                    @if ($UserInfo->fullName)
+                    <p>Online &sdot; 
+                        @if ($isFollowedByMe)
+                            <a href="/user/unfollow/{{ $UserInfo->username }}"> Unfollow @ {{ $UserInfo->username }}</a>
+                        @else
+                            <a href="/user/follow/{{ $UserInfo->username }}"> Follow @ {{ $UserInfo->username }}</a>
+                        @endif
+                    </p>
+                    @if ($UserInfo->full_name)
                         <p><a target="_blank" href="/user/{{ $UserInfo->username }}">@
                                 {{ $UserInfo->username }}</a></p>
                     @endif
@@ -545,6 +529,9 @@
                         <div id="view-biography-after">
                             <p>{{ $UserInfo->biography }}</p>
                             <ul>
+                                <li>
+                                    Registration Date: {{ $UserInfo->registration_date }}
+                                </li>
                                 @if ($UserInfo->url_website)
                                     <li>
                                         Website:
@@ -583,9 +570,9 @@
 
                     <div class="row">
 
-                        @for ($index = 0; $index < 30; $index++)
-                            <div class="col-sm-4">
-                                <img src="https://picsum.photos/450/450" class="img-thumbnail user-posts"
+                        @for ($index = 0; $index < count($UserPosts); $index++)
+                            <div class="col-sm-4" onclick="window.location.assign('/post/{{ $UserInfo->username }}/id/{{ $UserPosts[$index]->Id }}')">
+                                <img src="{{ $UserPosts[$index]->path }}" class="img-thumbnail user-posts"
                                     alt="user-posts">
                             </div>
                         @endfor
@@ -593,6 +580,7 @@
                     </div>
 
                 </div>
+                <div class="col-sm-2"></div>
 
             </div>
 

@@ -4,9 +4,61 @@ namespace App\Http\Logic;
 use Illuminate\Support\Facades\DB;
 
 class UserPosts{
+
+    public static function GetSelectedUserFollowingBase($Username)
+    {
+        return DB::select('SELECT U.Id, U.username, U.full_name, U.url_profile FROM users U 
+        INNER JOIN followers F 
+        ON F.followed_user_id = U.Id 
+        WHERE F.following_user_id = (SELECT Id FROM users WHERE username = ?) AND F.followed_user_id <> (SELECT Id FROM users WHERE username = ?)', [$Username, $Username]);
+    }
+
+    public static function GetSelectedUserNumberOfFollowing($Username)
+    {
+        return DB::select('SELECT COUNT(*) AS "total_following" FROM followers F
+        INNER JOIN users U
+        ON U.Id = F.following_user_id
+        WHERE U.username = ?', [$Username]);
+    }
+
+    public static function GetSelectedUserNumberOfBananas($Username) {
+        return DB::select("SELECT COUNT(*) AS 'total_number_of_bananas' FROM users U 
+        INNER JOIN posts P 
+        ON P.user_id = U.Id 
+        INNER JOIN bananas B 
+        ON P.Id = B.post_id 
+        WHERE U.username = ?", [$Username]);
+    }
+
+    public static function GetSelectedUserNumberOfPeaches($Username) {
+        return DB::select("SELECT COUNT(*) AS 'total_number_of_peaches' FROM users U 
+        INNER JOIN posts P 
+        ON P.user_id = U.Id 
+        INNER JOIN peachs Pe 
+        ON P.Id = Pe.post_id 
+        WHERE U.username = ?", [$Username]);
+    }
+
+    public static function GetSelectedUserNumberOfFollowers($Username)
+    {
+        return DB::select('SELECT COUNT(*) AS "total_followers" FROM followers F
+        INNER JOIN users U
+        ON U.Id = F.followed_user_id
+        WHERE U.username = ? AND F.following_user_id <> U.Id', [$Username]);
+    }
+
+
     public static function GetLatestPost()
     {
         $UserId = session()->get('user_info')["Id"];
+
+        //Check if user follows themselves
+        $FollowSelfCheck = DB::select("SELECT * FROM followers WHERE followed_user_id = ? AND following_user_id = ?", [$UserId, $UserId]);
+
+        // Follow self
+        if (!count($FollowSelfCheck)) {
+            DB::insert('INSERT INTO followers (followed_user_id, following_user_id) values (?, ?)', [$UserId, $UserId]);
+        }
 
         return DB::select('SELECT S.url_profile AS "Profile", S.Id AS "UserId", S.full_name AS "Name", S.username AS "Username", P.Id AS "PostId", P.path AS "Path", P.caption AS "Caption", P.created_date AS "CreatedDate" FROM followers f INNER JOIN posts P ON f.followed_user_id = P.user_id INNER JOIN users S ON S.Id = P.user_id WHERE f.following_user_id = ? ORDER BY P.created_date DESC', [$UserId]);
     }
